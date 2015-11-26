@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE facelet-taglib PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+        "http://java.sun.com/dtd/facelet-taglib_1_0.dtd">
+<facelet-taglib version="2.0"
+                xmlns="http://java.sun.com/xml/ns/javaee"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd">
+    <namespace>http://es.by/custom</namespace>
+    <function>
+        <function-name>getSubList</function-name>
+        <function-class>
+            by.es.tags.CustomELFunctions
+        </function-class>
+        <function-signature>
+            java.util.List getSubList(java.util.List, int, int)
+        </function-signature>
+    </function>
+
+    <function>
+        <function-name>loadMessage</function-name>
+        <function-class>
+            by.es.tags.ResourceMessageProvider
+        </function-class>
+        <function-signature>
+            java.lang.String getMessage(java.lang.String,java.lang.String)
+        </function-signature>
+    </function>
+    
+    <function>
+        <function-name>userStatusMessage</function-name>
+        <function-class>by.es.tags.ResourceMessageProvider</function-class>
+        <function-signature>
+            java.lang.String getUserStatusMessage(by.es.realm.entity.predefined.UserStatus)
+        </function-signature>
+    </function>
+
+</facelet-taglib>

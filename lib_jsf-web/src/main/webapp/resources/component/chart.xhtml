@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  User: Alexey.Koyro
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+    <cc:attribute name="type" type="java.lang.String" required="true"/>
+    <cc:attribute name="RESTServiceName" type="java.lang.String" required="true"/>
+    <cc:attribute name="uniqueId" type="java.lang.String" required="true"/>
+    <cc:attribute name="title" type="java.lang.String"/>
+    <cc:attribute name="styleClass" type="java.lang.String"/>
+    <cc:attribute name="color" type="java.lang.String"/>
+</cc:interface>
+
+<cc:implementation>
+    <h:outputScript library="js" name="jquery.min.js"/>
+    <h:outputScript library="js" name="jquery.gchart.min.js"/>
+    <h:outputScript library="js" name="ajaxChart.js"/>
+    <div id="#{cc.attrs.uniqueId}" class="#{cc.attrs.styleClass}"></div>
+    <script type="text/javascript">
+        var type = '#{cc.attrs.type}';
+        var url = '#{facesContext.externalContext.requestContextPath}/services#{cc.attrs.RESTServiceName}';
+        var elementId = '#{cc.attrs.uniqueId}';
+        var title = '#{cc.attrs.title}';
+        var color = '#{cc.attrs.color}';
+        getChart(type, url, elementId, color, title);
+    </script>
+</cc:implementation>
+
+</html>

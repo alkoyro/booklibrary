@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cf="http://es.by/custom"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:com="http://java.sun.com/jsf/composite/component"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ct="http://java.sun.com/jsf/composite/util"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+<ui:composition template="/mainTemplate.xhtml">
+    <ui:define name="title">Library/main page</ui:define>
+    <ui:define name="content">
+        <ct:previousPageLink styleClass="backURLlink"/>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Books in library: "/>
+            <h:outputText value="#{fn:length(bookListBean.bookList)}"/>
+
+            <h:outputLabel value="Users registered: "/>
+            <h:outputText value="#{fn:length(userListBean.userList)}"/>
+        </h:panelGrid>
+
+        <h4>Unique visitors by IP:</h4>
+        <h:panelGrid columns="2">
+
+            <h:outputLabel value="Day: "/>
+            <h:outputText value="#{appStatsBean.getUniqueVisitsDay()}"/>
+
+            <h:outputLabel value="Week: "/>
+            <h:outputText value="#{appStatsBean.getUniqueVisitsWeek()}"/>
+
+            <h:outputLabel value="Month: "/>
+            <h:outputText value="#{appStatsBean.getUniqueVisitsMonth()}"/>
+
+        </h:panelGrid>
+
+        <br/>
+        <com:chart type="line" RESTServiceName="/appstats/amount" title="Books amount:" color="green"
+                   uniqueId="amount" styleClass="lineChart"/>
+
+        <br/>
+        <com:chart type="line" RESTServiceName="/appstats/profit" title="Profit:" color="red"
+                   uniqueId="profit" styleClass="lineChart"/>
+
+    </ui:define>
+
+</ui:composition>
+</html>

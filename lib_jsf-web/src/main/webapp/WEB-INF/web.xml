@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <context-param>
+        <param-name>org.apache.myfaces.ERROR_HANDLING</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <!--<context-param>-->
+        <!--<param-name>com.sun.faces.enableMissingResourceLibraryDetection</param-name>-->
+        <!--<param-value>true</param-value>-->
+    <!--</context-param>-->
+
+    <filter>
+        <filter-name>FacesExtensionsFilter</filter-name>
+        <filter-class>org.apache.myfaces.webapp.filter.ExtensionsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FacesExtensionsFilter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>VisitFilter</filter-name>
+        <filter-class>by.es.filter.VisitFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>VisitFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <context-param>
+        <param-name>javax.faces.FACELETS_LIBRARIES</param-name>
+        <param-value>
+            /WEB-INF/custom.taglib.xml;
+            /WEB-INF/security.taglib.xml;
+        </param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.faces</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>tempServlet</servlet-name>
+        <servlet-class>by.es.bean.TempServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tempServlet</servlet-name>
+        <url-pattern>/admin/doWork</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ImageServlet</servlet-name>
+        <servlet-class>by.es.download.ImageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ImageServlet</servlet-name>
+        <url-pattern>/images/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReportServlet</servlet-name>
+        <servlet-class>by.es.report.ReportServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReportServlet</servlet-name>
+        <url-pattern>/performance/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EBookServlet</servlet-name>
+        <servlet-class>by.es.download.EBookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EBookServlet</servlet-name>
+        <url-pattern>/files/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>JAX-RS</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JAX-RS</servlet-name>
+        <url-pattern>/services/*</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.faces</welcome-file>
+    </welcome-file-list>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>customerArea</web-resource-name>
+            <url-pattern>/user/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>VISIT_USER_AREA</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>managementArea</web-resource-name>
+            <url-pattern>/manager/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>VISIT_MANAGEMENT_AREA</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>libraryRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/secure/loginForm.xhtml</form-login-page>
+            <form-error-page>/secure/loginForm.xhtml?result=failure</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/secure/exception.xhtml?result=accessDenied.error</location>
+    </error-page>
+
+    <security-role>
+        <role-name>VISIT_ADMIN_AREA</role-name>
+    </security-role>
+
+    <security-role>
+        <role-name>VISIT_USER_AREA</role-name>
+    </security-role>
+
+    <security-role>
+        <role-name>VISIT_MANAGEMENT_AREA</role-name>
+    </security-role>
+
+    <security-role>
+        <role-name>LOGIN_HISTORY</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>ADD_TO_CART</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>EDIT_MANAGER</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>LOAN_DEBTS</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>SERVER_STATS</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>DOWNLOAD_DIGITAL_BOOK</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>GIVE_DISCOUNT</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>LEAVE_COMMENT</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>UPLOAD_DIGITAL_BOOK</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>EDIT_BOOK</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>BLOCK_USER</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>LOOK_INTO_CART</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>EDIT_USER</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>PURCHASE_HISTORY</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>ADD_BOOK</role-name>
+    </security-role>
+
+
+    <security-role>
+        <role-name>CREATE_USER</role-name>
+    </security-role>
+
+
+</web-app>

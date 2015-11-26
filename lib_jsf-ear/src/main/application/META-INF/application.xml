@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_6.xsd"
+             version="6">
+    <display-name>lib_jsf-ear</display-name>
+    <module>
+        <web>
+            <web-uri>lib_jsf-web-1.0.war</web-uri>
+            <context-root>/lib_jsf-web</context-root>
+        </web>
+    </module>
+    <module>
+        <ejb>lib_jsf-ejb-1.0.jar</ejb>
+    </module>
+    <library-directory>lib</library-directory>
+</application>

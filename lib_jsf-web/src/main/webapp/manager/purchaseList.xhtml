@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cf="http://es.by/custom"
+      xmlns:ct="http://java.sun.com/jsf/composite/util"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns="http://www.w3.org/1999/xhtml">
+<ui:composition template="/mainTemplate.xhtml">
+    <ui:define name="title">Library/main page</ui:define>
+    <ui:define name="content">
+        <ct:previousPageLink styleClass="backURLlink"/>
+        <br/>
+        <h:panelGroup rendered="#{fn:length(purchaseBean.purchaseUserList) == 0}">
+            Your history is empty
+        </h:panelGroup>
+        <ct:paginator list="#{purchaseBean.purchaseList}" offset="#{param.offset}"/>
+        <ct:scroller styleClass="scroller"/>
+
+        <h:dataTable value="#{pageList}" var="purchase" width="100%" columnClasses="bookListElement">
+            <h:column>
+                <b>User</b>: #{purchase.user.login}<br/>
+                <b>Purchase date</b>: #{purchase.purchaseDate}<br/>
+                <b>Purchase ID</b>: #{purchase.id}<br/>
+                <ul>
+                    <h:dataTable value="#{purchase.purchaseElementList}" var="purchaseElement" width="100%">
+                        <h:column>
+                            <li>
+                                <b>Title</b>: #{purchaseElement.book.title}<br/>
+                                <b>Author</b>: #{purchaseElement.book.author}<br/>
+                                <b>Book type</b>: #{purchaseElement.bookVersion}<br/>
+                                <b>Amount</b>: #{purchaseElement.amount}<br/>
+                                <b>Cost</b>:
+                                <h:outputText value="#{purchaseElement.cost}">
+                                    <f:convertNumber type="currency" locale="en" currencySymbol="$"/>
+                                </h:outputText>
+                                <br/>
+                            </li>
+                        </h:column>
+                    </h:dataTable>
+                </ul>
+
+
+            </h:column>
+        </h:dataTable>
+        <ct:scroller styleClass="scroller"/>
+    </ui:define>
+
+</ui:composition>
+</html>

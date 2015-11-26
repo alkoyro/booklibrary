@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:com="http://java.sun.com/jsf/composite/component">
+<ui:composition template="/mainTemplate.xhtml">
+
+    <ui:define name="title">Library/main page</ui:define>
+    <ui:define name="content">
+
+
+        <h:panelGroup rendered="#{fn:length(cartBean.cart) == 0}">
+            <h:outputLabel value="#{cartBundle.cartState}"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{fn:length(cartBean.cart) > 0}">
+            <h:dataTable value="#{cartBean.cart}" var="cartElement">
+                <h:column>
+                    <com:bookDetail book="#{cartElement.book}"/>
+                    <h:form>
+                        <h:outputLabel for="amount" value="#{cartBundle.amountLabel}"/>
+                        <h:inputText id="amount" value="#{cartElement.amount}" size="3" maxlength="5"
+                                     style="margin: 5px;"/>
+                        <h:outputLabel for="amount" value="Price: "/>
+                        <h:outputLabel for="amount"
+                                       value="#{cartElement.book.price.cost * cartElement.amount * (1 - 0.01 * userBean.user.discount)}">
+                            <f:convertNumber type="currency" locale="en" currencySymbol="$"/>
+                        </h:outputLabel>
+                        <h:commandButton value="#{cartBundle.setAmountAction}" style="margin: 5px;"/>
+                        <h:commandButton value="#{cartBundle.removeAction}"
+                                         actionListener="#{cartBean.removeFromCart(cartElement.book)}"
+                                         style="margin: 5px;"/>
+                    </h:form>
+                    <hr/>
+                </h:column>
+            </h:dataTable>
+            <br/>
+            <h:form>
+                <h:commandButton value="#{cartBundle.orderAction}" action="order"/>
+                <h:outputLabel value="Full price vaule: "/>
+                <h:outputLabel for="amount" value="#{cartBean.fullPrice}">
+                    <f:convertNumber type="currency" locale="en" currencySymbol="$"/>
+                </h:outputLabel>
+
+            </h:form>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>
+</html>

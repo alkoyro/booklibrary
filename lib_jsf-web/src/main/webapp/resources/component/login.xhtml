@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cf="http://es.by/custom"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:component>
+
+    <h:outputLabel rendered="#{param.result == 'failure'}" id="errorMessage"
+                           value="Password or login irregular" styleClass="errorMessage"/>
+    <f:event type="preRenderComponent" listener="#{loginBean.preLogin(param.result)}"/>
+
+    <h:form id="loginForm">
+        <h:panelGrid columns="2" styleClass="loginComp">
+            <h:outputLabel id="userNameLabel" for="j_username" value="Login"/>
+            <h:inputText id="j_username" autocomplete="off" value="#{loginBean.login}"/>
+            <h:outputLabel id="passwordLabel" for="j_password" value="Password"/>
+            <h:inputSecret id="j_password" autocomplete="off" value="#{loginBean.password}"/>
+            <br/>
+            <h:commandButton type="submit" value="Login >> "
+                             actionListener="#{loginBean.performLogin}"/>
+        </h:panelGrid>
+    </h:form>
+
+</ui:component>
+</html>
+

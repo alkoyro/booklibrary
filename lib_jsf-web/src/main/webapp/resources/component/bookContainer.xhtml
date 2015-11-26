@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  User: Alexey.Koyro
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:com="http://java.sun.com/jsf/composite/component"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:component>
+    <h:dataTable id="bookList" value="#{pageList}" var="book" >
+        <h:column>
+
+            <h:panelGrid columns="2" columnClasses="containerDetail" styleClass="bookListElement">
+
+                <h:link outcome="bookinfo">
+                    <f:param name="bookId" value="#{book.id}"/>
+                    <h:graphicImage value="/images/#{book.id}"/>
+                </h:link>
+
+                <h:panelGrid styleClass="descriptionInfo" columnClasses="detailElementDescription"
+                             columns="1">
+                    <h:link outcome="bookinfo">
+                        <f:param name="bookId" value="#{book.id}"/>
+                        <b>#{book.title} - #{book.author} </b>
+                    </h:link>
+                    <h:outputLabel value="#{book.description}"/>
+                    <com:bookPanel book="#{book}"/>
+                </h:panelGrid>
+            </h:panelGrid>
+
+            <hr/>
+
+        </h:column>
+
+    </h:dataTable>
+
+</ui:component>
+
+</html>

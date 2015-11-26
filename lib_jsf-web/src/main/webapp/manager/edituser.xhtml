@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:cus="http://es.by/custom"
+      xmlns:sec="http://es.by/security"
+      xmlns:ct="http://java.sun.com/jsf/composite/util"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+<ui:composition template="/mainTemplate.xhtml">
+    <ui:define name="title">Library/edit user</ui:define>
+    <ui:define name="content">
+        <ct:previousPageLink styleClass="backURLlink"/>
+
+        <c:set var="elementSize" value="40"/>
+
+        <h:form id="editUser" styleClass="defaultEditForm">
+
+            <t:panelTabbedPane id="tabbedPanel" styleClass="editUserMenuForm">
+
+                <t:panelTab id="userDetails" label="#{editUserBundle.userDetailsTabTitle}">
+
+                    <h:panelGrid columns="2" columnClasses="tabPanel">
+
+                        <f:event type="preRenderComponent" listener="#{editUserBean.initEnv(param.userId)}"/>
+
+                        <h:outputLabel value="#{editUserBundle.loginLabel}" for="loginText"/>
+                        <h:inputText id="loginText" size="#{elementSize}"
+                                     value="#{editUserBean.user.login}" readonly="true" disabled="true">
+                        </h:inputText>
+
+                        <h:outputLabel value="#{editUserBundle.firstNameLabel}" for="firstNameText"/>
+                        <h:inputText id="firstNameText" size="#{elementSize}"
+                                     value="#{editUserBean.user.firstName}">
+                            <f:validator validatorId="requiredValueValidator"/>
+                        </h:inputText>
+
+                        <h:outputLabel value="#{editUserBundle.lastNameLabel}" for="lastNameText"/>
+                        <h:inputText id="lastNameText" size="#{elementSize}"
+                                     value="#{editUserBean.user.lastName}">
+                            <f:validator validatorId="requiredValueValidator"/>
+                        </h:inputText>
+
+                        <h:outputLabel value="#{editUserBundle.emailLabel}" for="emailText"/>
+                        <h:inputText id="emailText" size="#{elementSize}"
+                                     value="#{editUserBean.user.email}">
+                            <f:validator validatorId="emailValidator"/>
+                            <f:validator validatorId="requiredValueValidator"/>
+                        </h:inputText>
+
+                        <h:outputLabel value="#{editUserBundle.userDiscount}" for="personalDiscount"/>
+                        <h:inputText id="personalDiscount" size="#{elementSize}"
+                                     value="#{editUserBean.user.discount}"
+                                     validator="#{editUserBean.validateDiscount}"/>
+
+                        <h:outputLabel value="#{editUserBundle.userStatusLabel}" for="statusCheckBox"
+                                       rendered="${sec:isAllowed('BLOCK_USER')}"/>
+                        <h:selectOneMenu id="statusCheckBox" styleClass="selectOneMenu"
+                                         value="#{editUserBean.user.userStatus}"
+                                         rendered="${sec:isAllowed('BLOCK_USER')}"
+                                         binding="#{editUserBean.selectStatusItem}"/>
+                    </h:panelGrid>
+                </t:panelTab>
+
+                <t:panelTab id="userPermissions" label="#{editUserBundle.userPermissionTabTitle}">
+                    <h:panelGrid columns="3">
+
+                        <h:outputLabel value="#{editUserBundle.userPermLabel}"/>
+                        <h:inputHidden id="resultPermissions" value="#{editUserBean.resultPermissions}"/>
+                        <h:outputLabel value="#{editUserBundle.allowedPerm}"/>
+
+                        <h:selectManyListbox id="userPerm" size="20" styleClass="userPermiss">
+                            <f:selectItems id="userPermissions"
+                                           value="#{editUserBean.userPermissionItems}"/>
+                        </h:selectManyListbox>
+
+                        <h:panelGroup id="actionsMenu">
+
+                            <h:panelGrid columns="1">
+
+                                <h:commandButton value="#{editUserBundle.moveToRight}" type="button"
+                                                 onclick="migrate('#editUser\\:userPermissions\\:userPerm',
+                                                 '#editUser\\:userPermissions\\:allowedPerm')">
+                                </h:commandButton>
+
+                                <h:commandButton id="moveToLeft" value="#{editUserBundle.moveToLeft}" type="button"
+                                                 onclick="migrate('#editUser\\:userPermissions\\:allowedPerm',
+                                                 '#editUser\\:userPermissions\\:userPerm')">
+                                </h:commandButton>
+
+                            </h:panelGrid>
+                        </h:panelGroup>
+
+                        <h:selectManyListbox id="allowedPerm" size="20" styleClass="allowedPermiss">
+                            <f:selectItems id="allowedPermissions"
+                                           value="#{editUserBean.allowedPermissionItems}"/>
+                        </h:selectManyListbox>
+
+                    </h:panelGrid>
+                </t:panelTab>
+
+
+            </t:panelTabbedPane>
+
+            <h:commandButton value="#{editUserBundle.applyAction}" action="main"
+                             actionListener="#{editUserBean.applyChanges}"
+                             onclick="selectAllItems()">
+            </h:commandButton>
+
+            <f:event type="preValidate" listener="#{clearErrorsListener.clearWarnings}"/>
+
+        </h:form>
+
+        <h:panelGrid id="errorMessages" columns="2" binding="#{editUserBean.errorsPanel}"
+                     styleClass="editUserErrorMessages"/>
+
+    </ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:cf="http://es.by/custom">
+<cc:interface>
+    <cc:attribute name="styleClass"/>
+</cc:interface>
+<cc:implementation>
+    <table width="100%" class="#{cc.attrs.styleClass}">
+        <tr>
+            <td align="left" width="33%">
+                <h:link rendered="#{listOffset >= listRows}">
+                    Previous page
+                    <f:param name="offset" value="#{listOffset - listRows}"/>
+                </h:link>
+
+            </td>
+
+            <td align="center" width="33%">
+                <h:panelGroup rendered="#{listSize > listRows}">
+                    #{listOffset+1} - #{listOffset+listRows} (#{listSize})
+                </h:panelGroup>
+            </td>
+
+            <td>
+
+            </td>
+            <td align="right" width="33%">
+                <h:link rendered="#{(listSize - listOffset - listRows) > 0}">
+                    Next page
+                    <f:param name="offset" value="#{listOffset + listRows}"/>
+                </h:link>
+            </td>
+        </tr>
+    </table>
+</cc:implementation>
+</html>

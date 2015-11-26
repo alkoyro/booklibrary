@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  User: Alexey.Koyro
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/mainTemplate.xhtml">
+    <ui:define name="title">Library/application performance</ui:define>
+    <ui:define name="content">
+
+        <h:dataTable id="performanceTable" value="#{performanceStatBean.performanceTypes}"
+                     var="performanceType" styleClass="defaultViewForm">
+            <h:column>
+                <h:panelGrid columns="1" columnClasses="detailDescription">
+
+                    <h:outputLink value="#{facesContext.externalContext.request.contextPath}/performance/performanceType">
+                        <h:outputText value="#{performanceType}"/>
+                        <f:param name="performance" value="#{performanceType}"/>
+                    </h:outputLink>
+
+                </h:panelGrid>
+                <hr/>
+            </h:column>
+        </h:dataTable>
+    </ui:define>
+</ui:composition>
+
+</html>

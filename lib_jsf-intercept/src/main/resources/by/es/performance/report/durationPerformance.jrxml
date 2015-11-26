@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="durationPerformance" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="188"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="className" class="java.lang.String">
+		<fieldDescription><![CDATA[className]]></fieldDescription>
+	</field>
+	<field name="duration" class="java.lang.Long">
+		<fieldDescription><![CDATA[duration]]></fieldDescription>
+	</field>
+	<field name="methodName" class="java.lang.String">
+		<fieldDescription><![CDATA[methodName]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="463" y="7" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="7" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$R{title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="11" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="65" splitType="Stretch">
+			<textField>
+				<reportElement x="266" y="2" width="181" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{methodName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="266" y="23" width="181" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{className}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="64" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="146" y="21" width="301" height="1"/>
+			</line>
+			<line>
+				<reportElement x="265" y="1" width="1" height="63"/>
+			</line>
+			<textField>
+				<reportElement x="146" y="45" width="119" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$R{callDuration}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="146" y="43" width="301" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="266" y="44" width="181" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{duration}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="22" width="119" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$R{className}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="3" width="119" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$R{methodName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="429" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$R{currentPage}+" "+$V{PAGE_NUMBER}+" "+$R{ofPage}+""]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="509" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="17" splitType="Stretch"/>
+	</summary>
+</jasperReport>

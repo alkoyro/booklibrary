@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cf="http://es.by/custom"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ct="http://java.sun.com/jsf/composite/util"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://es.by/security">
+<ui:composition template="/mainTemplate.xhtml">
+    <ui:define name="title">Library/add book</ui:define>
+    <ui:define name="content">
+
+        <c:set var="inputTextSize" value="80"/>
+        <c:set var="textAreaSize" value="61"/>
+        <ct:previousPageLink styleClass="backURLlink"/>
+
+        <h:form>
+            <h:panelGrid columns="1" styleClass="defaultEditForm" columnClasses="defaultEditFormLeft, defaultEditFormRight">
+                <h:outputLabel for="author" value="#{addBookBundle.author}"/>
+
+                <h:inputText id="author" value="#{addBookBean.book.author}"
+                             validator="#{addBookBean.validateIsEmpty}"
+                             size="#{inputTextSize}"/>
+
+                <h:outputLabel for="title" value="#{addBookBundle.title}"/>
+                <h:inputText id="title" value="#{addBookBean.book.title}"
+                             size="#{inputTextSize}"
+                             validator="#{addBookBean.validateIsEmpty}"/>
+
+                <h:outputLabel for="description" value="#{addBookBundle.description}" />
+                <h:inputTextarea id="description" value="#{addBookBean.book.description}"
+                                 styleClass="textArea"
+                                 cols="#{textAreaSize}"
+                                 rows="6"/>
+
+                <h:outputLabel for="price" value="#{addBookBundle.price}"/>
+                <h:inputText id="price" value="#{addBookBean.book.price.cost}"
+                             size="#{inputTextSize}"/>
+
+                <h:outputLabel for="priceEbook" value="#{addBookBundle.priceEbook}"/>
+                <h:inputText id="priceEbook" value="#{addBookBean.book.price.costEbook}"
+                             size="#{inputTextSize}"/>
+
+                <h:outputLabel for="quantity" value="#{addBookBundle.quantity}"/>
+                <h:inputText id="quantity" value="#{addBookBean.book.numberOfCopy}"
+                             size="#{inputTextSize}"/>
+
+                <h:commandButton value="#{addBookBundle.addBookAction}"
+                                 actionListener="#{addBookBean.addBook()}"
+                                 rendered="#{sec:isAllowed('VISIT_MANAGEMENT_AREA') and sec:isAllowed('ADD_BOOK') and sec:isAllowed('EDIT_BOOK')}"/>
+
+                <f:event type="preValidate" listener="#{addBookBean.clearWarnings}"/>
+
+            </h:panelGrid>
+
+
+        </h:form>
+
+        <h:panelGrid id="errorMessages" columns="2" binding="#{addBookBean.errorsPanel}"
+                     styleClass="errorMessages"/>
+
+    </ui:define>
+</ui:composition>
+</html>

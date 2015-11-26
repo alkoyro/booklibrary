@@ -1,0 +1,50 @@
+.textArea {
+    resize: none;
+}
+
+.defaultEditForm {
+}
+
+.defaultEditFormLeft {
+    vertical-align: top;
+}
+
+.defaultEditFormRight {
+
+}
+
+.errorMessages {
+    text-align: center;
+    position: absolute;
+    left: 46%;
+    top: 46%;
+}
+
+.userPermiss {
+    width: 250px;
+}
+
+.allowedPermiss {
+    width: 250px;
+}
+
+.tabPanel {
+    width: 150px;
+}
+
+.editUserMenuForm {
+    width: 600px;
+    height: 450px;
+
+}
+
+.selectOneMenu {
+    width: 260px;
+}
+
+.editUserErrorMessages {
+    text-align: center;
+    position: absolute;
+    left: 46%;
+    bottom: 16%;
+}

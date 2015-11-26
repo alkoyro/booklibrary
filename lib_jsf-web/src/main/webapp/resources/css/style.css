@@ -1,0 +1,74 @@
+hr {
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    border-top-style: ridge;
+}
+
+ul.left_menu li {
+    padding: 2px;
+}
+
+.label {
+    display: block;
+    margin: 10px 0px 10px 0px;
+}
+
+.comment {
+    display: block;
+    margin: 10px 0px 10px 0px;
+    padding: 10px 0px 10px 10px;
+    font-style: italic;
+    background-color: #f0fff0;
+    border: #036fab 1px dashed;
+
+}
+
+.comments {
+    width: 100%;
+    padding: 10px 0px 10px 10px;
+
+}
+
+.alert {
+    display: block;
+    color: red;
+    font-size: smaller;
+}
+
+.scroller {
+    padding: 10px;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.fullHeight {
+    height: 100%;
+}
+
+.userlist {
+    padding: 5px;
+    border-style: dotted;
+    border-width: 1px;
+}
+
+.lineChart {
+    height: 300px;
+    margin: 20px;
+}
+
+.pieChart {
+    height: 250px;
+    margin: 0px;
+}
+
+.backURLlink {
+    display: block;
+    padding: 10px;
+    background-color: #f0f8ff;
+}
+
+
+

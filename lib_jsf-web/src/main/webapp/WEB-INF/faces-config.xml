@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+              version="2.0">
+    <validator>
+        <validator-id>emailValidator</validator-id>
+        <validator-class>by.es.validator.EmailValidator</validator-class>
+    </validator>
+
+    <validator>
+        <validator-id>requiredValueValidator</validator-id>
+        <validator-class>by.es.validator.RequiredValueValidator</validator-class>
+    </validator>
+
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>performance</from-outcome>
+            <to-view-id>/admin/performance.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>loginError</from-outcome>
+            <to-view-id>/secure/loginForm.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>main</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>exception</from-outcome>
+            <to-view-id>/secure/exception.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>userlist</from-outcome>
+            <to-view-id>/manager/userlist.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>addbook</from-outcome>
+            <to-view-id>/manager/addbook.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>userCart</from-outcome>
+            <to-view-id>/user/cart.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>registration</from-outcome>
+            <to-view-id>/registration.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>forgotPassword</from-outcome>
+            <to-view-id>/forgotPassword.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>purchaseHistory</from-outcome>
+            <to-view-id>/user/history.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>purchaseList</from-outcome>
+            <to-view-id>/manager/purchaseList.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>bookStats</from-outcome>
+            <to-view-id>/manager/bookStats.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>search</from-outcome>
+            <to-view-id>/search.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>bookinfo</from-outcome>
+            <to-view-id>/bookinfo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>userInfo</from-outcome>
+            <to-view-id>/user/userInfo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>eBook</from-outcome>
+            <to-view-id>/eBook.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>editUser</from-outcome>
+            <to-view-id>/manager/edituser.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>editBook</from-outcome>
+            <to-view-id>/manager/editbook.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>deletedBooks</from-outcome>
+            <to-view-id>/manager/deletedBooks.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+
+        <navigation-case>
+            <from-outcome>appStats</from-outcome>
+            <to-view-id>/manager/appStats.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <converter>
+        <converter-id>timeConverter</converter-id>
+        <converter-class>by.es.converter.TimeConverter</converter-class>
+    </converter>
+
+    <!--managed-bean>
+        <managed-bean-name>performanceStatBean</managed-bean-name>
+        <managed-bean-class>by.es.interceptor.bean.PerformanceStatBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean-->
+
+    <application>
+        <navigation-handler>by.es.navigation.LibraryNavigationHandler</navigation-handler>
+
+        <resource-bundle>
+            <base-name>properties.errors</base-name>
+            <var>errors</var>
+        </resource-bundle>
+
+        <resource-bundle>
+            <base-name>properties.registration</base-name>
+            <var>registrationBundle</var>
+        </resource-bundle>
+
+        <resource-bundle>
+            <base-name>properties.mainMenu</base-name>
+            <var>mainMenuBundle</var>
+        </resource-bundle>
+
+        <resource-bundle>
+            <base-name>properties.addBook</base-name>
+            <var>addBookBundle</var>
+        </resource-bundle>
+
+        <resource-bundle>
+            <base-name>properties.cart</base-name>
+            <var>cartBundle</var>
+        </resource-bundle>
+
+        <resource-bundle>
+            <base-name>properties.bookDetail</base-name>
+            <var>bookDetailBundle</var>
+        </resource-bundle>
+
+        <resource-bundle>
+            <base-name>properties.userList</base-name>
+            <var>usersBundle</var>
+        </resource-bundle>
+
+        <resource-bundle>
+            <base-name>properties.userStatus</base-name>
+            <var>userStatusBundle</var>
+        </resource-bundle>
+
+        <resource-bundle>
+            <base-name>properties.editUser</base-name>
+            <var>editUserBundle</var>
+        </resource-bundle>
+
+    </application>
+
+    <factory>
+        <exception-handler-factory>by.es.auth.exception.handler.ExceptionHandlerFactoryImpl</exception-handler-factory>
+    </factory>
+
+</faces-config>

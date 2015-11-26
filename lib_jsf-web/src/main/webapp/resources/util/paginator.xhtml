@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cf="http://es.by/custom">
+<cc:interface>
+    <cc:attribute name="list" required="true"/>
+    <cc:attribute name="rows" default="10"/>
+    <cc:attribute name="offset" required="true" default="0"/>
+</cc:interface>
+<cc:implementation>
+    <c:set var="offset" value="#{cc.attrs.offset}"/>
+    <c:if test="#{0 > offset}">
+        <c:set var="offset" value="0"/>
+    </c:if>
+
+    <c:set var="listSize" value="#{fn:length(cc.attrs.list)}" scope="request"/>
+    <c:set var="listOffset" value="#{offset}" scope="request"/>
+    <c:set var="listRows" value="#{cc.attrs.rows}" scope="request"/>
+    <c:set var="pageList" value="#{cf:getSubList(cc.attrs.list, cc.attrs.offset, (cc.attrs.offset+cc.attrs.rows))}" scope="request" />
+</cc:implementation>
+
+</html>

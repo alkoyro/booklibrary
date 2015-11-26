@@ -1,0 +1,14 @@
+<!DOCTYPE aspectj PUBLIC
+        "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+    <weaver options="-verbose -showWeaveInfo">
+        <!-- only weave classes with @Interceptable annotation -->
+        <!--include within="by.es..*"/-->
+        <!-- use for LTW option-->
+        <!--include within="by.es.interceptor.*"/-->
+    </weaver>
+    <aspects>
+        <!-- use only this aspect for weaving -->
+        <!--aspect name="by.es.interceptor.PerformanceInspector"/-->
+    </aspects>
+</aspectj>

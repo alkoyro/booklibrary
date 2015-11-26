@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cf="http://es.by/custom"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:com="http://java.sun.com/jsf/composite/component">
+<ui:composition template="/mainTemplate.xhtml">
+    <ui:define name="title">Library/main page</ui:define>
+    <ui:define name="content">
+        <f:event type="preRenderView" listener="#{userInfoBean.loadUserById(param.userId)}"/>
+
+        <h:panelGrid columns="2" styleClass="bookPanel" columnClasses="detailDescription, detailElementDescription">
+
+            <h:outputLabel value="User ID: "/>
+            <h:outputText value="#{userInfoBean.user.id}"/>
+
+            <h:outputLabel value="Login: "/>
+            <h:outputText value="#{userInfoBean.user.login}"/>
+
+            <h:outputLabel value="First name: "/>
+            <h:outputText value="#{userInfoBean.user.firstName}"/>
+
+            <h:outputLabel value="Last name: "/>
+            <h:outputText value="#{userInfoBean.user.lastName}"/>
+
+            <h:outputLabel value="Books buyed: "/>
+            <h:outputText value="#{userInfoBean.userPurchaseCount}"/>
+
+            <h:outputLabel value="Last login date: "/>
+            <h:outputText value="#{userInfoBean.user.lastLoginDate}">
+                <f:convertDateTime dateStyle="full" locale="by" type="both"/>
+            </h:outputText>
+
+
+        </h:panelGrid>
+        <br/>
+        <com:userComments user="#{userInfoBean.user}"/>
+    </ui:define>
+
+</ui:composition>
+</html>

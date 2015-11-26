@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cf="http://es.by/custom"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:sec="http://es.by/security"
+      xmlns:ct="http://java.sun.com/jsf/composite/util"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:com="http://java.sun.com/jsf/composite/component" xmlns:t="http://myfaces.apache.org/tomahawk">
+<ui:composition template="/mainTemplate.xhtml">
+    <ui:define name="title">Library/main page</ui:define>
+    <ui:define name="content">
+        <f:event type="preRenderView" listener="#{bookInfoBean.findBookById(param.bookId)}"/>
+        <ct:previousPageLink styleClass="backURLlink"/>
+        <br/>
+        <com:bookDetail book="#{bookInfoBean.book}"/>
+        <br/>
+        <com:bookPanel book="#{bookInfoBean.book}"/>
+        <br/>
+        <com:bookComments book="#{bookInfoBean.book}"/>
+    </ui:define>
+</ui:composition>
+</html>

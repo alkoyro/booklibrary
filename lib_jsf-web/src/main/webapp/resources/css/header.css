@@ -1,0 +1,14 @@
+.leftHeaderMenu {
+
+}
+.rightHeaderMenu {
+
+    vertical-align: text-bottom;
+    text-align: right;
+    float: right;
+
+}
+
+.headerMenu {
+    width: 100%;
+}

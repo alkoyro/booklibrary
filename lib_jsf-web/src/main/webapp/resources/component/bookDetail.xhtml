@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  User: Alexey.Koyro
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<cc:interface>
+    <cc:attribute name="book" required="true"/>
+</cc:interface>
+
+<cc:implementation>
+
+    <h:panelGrid columns="2" columnClasses="detailLeftComp, detailtRightComp" styleClass="bookListElement">
+
+        <h:link outcome="bookinfo">
+            <f:param name="bookId" value="#{cc.attrs.book.id}"/>
+            <h:graphicImage value="/images/#{cc.attrs.book.id}" />
+        </h:link>
+
+
+        <h:panelGrid columns="2" columnClasses="detailDescription, detailElementDescription">
+            <h:outputLabel value="#{bookDetailBundle.bookTitle}"/>
+            <h:outputLabel value="#{cc.attrs.book.title}"/>
+
+            <h:outputLabel value="#{bookDetailBundle.bookAuthor}"/>
+            <h:outputLabel value="#{cc.attrs.book.author}"/>
+
+            <h:outputLabel value="#{bookDetailBundle.bookNumberOfCopies}"/>
+            <h:outputLabel value="#{cc.attrs.book.numberOfCopy}"/>
+
+            <h:outputLabel value="#{bookDetailBundle.price}"/>
+            <h:outputText value="#{cc.attrs.book.price.cost*(1 - (userBean.user.discount*0.01))}">
+                <f:convertNumber type="currency" locale="en" currencySymbol="$"/>
+            </h:outputText>
+
+            <h:outputLabel value="#{bookDetailBundle.priceEbook}"/>
+            <h:outputText value="#{cc.attrs.book.price.costEbook*(1 - (userBean.user.discount*0.01))}">
+                <f:convertNumber type="currency" locale="en" currencySymbol="$"/>
+            </h:outputText>
+
+            <h:outputLabel value="#{bookDetailBundle.bookDescription}"/>
+            <h:outputLabel value="#{cc.attrs.book.description}"/>
+
+        </h:panelGrid>
+
+    </h:panelGrid>
+
+
+</cc:implementation>
+
+</html>

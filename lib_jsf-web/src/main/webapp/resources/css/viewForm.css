@@ -1,0 +1,22 @@
+.defaultViewForm {
+    width: 100%;
+}
+
+.detailLeftComp {
+    height: inherit;
+    vertical-align: top;
+}
+
+.detailtRightComp {
+
+}
+
+.detailDescription {
+    font-weight: bold;
+    width: 120px;
+    vertical-align: top;
+}
+
+.detailElementDescription {
+    vertical-align: top;
+}

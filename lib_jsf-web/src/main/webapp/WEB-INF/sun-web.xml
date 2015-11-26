@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Application Server 9.0 Servlet 2.5//EN"
+        "http://www.sun.com/software/appserver/dtds/sun-web-app_2_5-0.dtd">
+<sun-web-app error-url="">
+    <context-root>/lib_jsf-web</context-root>
+
+    <!-- roles to protect web-resources-->
+    <security-role-mapping>
+        <role-name>VISIT_USER_AREA</role-name>
+        <group-name>VISIT_USER_AREA</group-name>
+    </security-role-mapping>
+
+    <security-role-mapping>
+        <role-name>VISIT_MANAGEMENT_AREA</role-name>
+        <group-name>VISIT_MANAGEMENT_AREA</group-name>
+    </security-role-mapping>
+
+    <security-role-mapping>
+        <role-name>VISIT_ADMIN_AREA</role-name>
+        <group-name>VISIT_ADMIN_AREA</group-name>
+    </security-role-mapping>
+
+
+    <!-- all roles are used to protect EJB -->
+    <security-role-mapping>
+        <role-name>LOGIN_HISTORY</role-name>
+        <group-name>LOGIN_HISTORY</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>ADD_TO_CART</role-name>
+        <group-name>ADD_TO_CART</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>EDIT_MANAGER</role-name>
+        <group-name>EDIT_MANAGER</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>LOAN_DEBTS</role-name>
+        <group-name>LOAN_DEBTS</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>SERVER_STATS</role-name>
+        <group-name>SERVER_STATS</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>DOWNLOAD_DIGITAL_BOOK</role-name>
+        <group-name>DOWNLOAD_DIGITAL_BOOK</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>GIVE_DISCOUNT</role-name>
+        <group-name>GIVE_DISCOUNT</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>LEAVE_COMMENT</role-name>
+        <group-name>LEAVE_COMMENT</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>UPLOAD_DIGITAL_BOOK</role-name>
+        <group-name>UPLOAD_DIGITAL_BOOK</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>EDIT_BOOK</role-name>
+        <group-name>EDIT_BOOK</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>BLOCK_USER</role-name>
+        <group-name>BLOCK_USER</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>LOOK_INTO_CART</role-name>
+        <group-name>LOOK_INTO_CART</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>EDIT_USER</role-name>
+        <group-name>EDIT_USER</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>PURCHASE_HISTORY</role-name>
+        <group-name>PURCHASE_HISTORY</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>ADD_BOOK</role-name>
+        <group-name>ADD_BOOK</group-name>
+    </security-role-mapping>
+
+
+    <security-role-mapping>
+        <role-name>CREATE_USER</role-name>
+        <group-name>CREATE_USER</group-name>
+    </security-role-mapping>
+
+
+    <class-loader delegate="true"/>
+    <jsp-config>
+        <property name="keepgenerated" value="true">
+            <description>Keep a copy of the generated servlet class java code.</description>
+        </property>
+    </jsp-config>
+
+</sun-web-app>

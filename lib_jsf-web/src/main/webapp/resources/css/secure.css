@@ -1,0 +1,38 @@
+#top {
+    position: absolute;
+    background-color: #036fab;
+    text-align: center;
+    top: 2%;
+    left: 1%;
+    width: 98%;
+}
+
+#content{
+    position: absolute;
+    left: 40%;
+    top: 43%;
+}
+
+.loginComp {
+    text-align: right;
+}
+
+.errorMessage{
+    font-size: large;
+    font-family: Arial,serif;
+    position: relative;
+    left: 12%;
+    top: -70px;
+}
+
+.footer {
+    background-color: #036fab;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    bottom: 2%;
+    left: 1%;
+    min-height: 3%;
+    max-width: 12%;
+    opacity:0.7;
+}

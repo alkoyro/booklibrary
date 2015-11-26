@@ -1,0 +1,44 @@
+.cartButton {
+
+}
+
+.descriptionInfo {
+
+    width: 100%;
+    float: left;
+
+}
+
+.bookPanel {
+    display: block;
+    margin: 10px 0px 0px 0px;
+    padding: 8px;
+    background-color: #f0f8ff;
+    border: #036fab 1px dashed;
+
+}
+
+.bookListElement {
+    background-color: #fcfcfc;
+    padding: 10px;
+    width: 100%;
+    border: #036fab 1px dotted;
+}
+
+.containerDetail {
+    vertical-align:top;
+    width: 0px;
+    padding-right: 5px;
+
+
+}
+
+.download {
+
+
+}
+
+.defaultContainerForm {
+    height: 160px;
+
+}

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cf="http://es.by/custom"
+      xmlns:sec="http://es.by/security"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:ct="http://java.sun.com/jsf/composite/util">
+<ui:component>
+    <h:panelGrid columns="2" styleClass="headerMenu" columnClasses="leftHeaderMenu, rightHeaderMenu">
+        <f:event type="preRenderView" listener="#{searchBean.setSearchkey(param.searchKey)}"/>
+        <h:panelGrid columns="1" columnClasses="leftHeaderMenu" styleClass="headerMenu">
+            <h:panelGroup>
+                <h:link outcome="main" class="label">
+                    <h1>#{mainMenuBundle.webSiteName}</h1>
+                </h:link>
+                <h:form>
+                    <h:inputText value="#{searchBean.searchkey}" id="searchText"/>
+                    <h:commandButton value="#{mainMenuBundle.searchAction}"
+                                     actionListener="#{searchBean.search}"/>
+                </h:form>
+            </h:panelGroup>
+
+        </h:panelGrid>
+
+        <h:panelGroup rendered="#{userBean.user == null}">
+            <h:link outcome="registration" value="#{mainMenuBundle.registration}"/>
+            &nbsp;|&nbsp;
+            <h:link outcome="forgotPassword" value="Forgot password"/>
+
+            <ui:insert name="loginComp">
+                <ui:include src="login.xhtml"/>
+            </ui:insert>
+        </h:panelGroup>
+        <h:panelGrid rendered="#{userBean.user != null}" columns="7" styleClass="rightHeaderMenu">
+            <ct:userInfoLink user="#{userBean.user}" />
+            <h:panelGroup  rendered="#{sec:isAllowed('VISIT_USER_AREA') and sec:isAllowed('LOOK_INTO_CART')}">
+            &nbsp;|&nbsp;
+            <h:link outcome="userCart"
+                    id="cart"
+                    value="#{mainMenuBundle.userCart} (#{fn:length(cartBean.cart)})"/>
+            </h:panelGroup>
+            <h:panelGroup  rendered="#{sec:isAllowed('VISIT_USER_AREA')}">
+            &nbsp;|&nbsp;
+            <h:link outcome="purchaseHistory"
+                    id="loan"
+                    value="#{mainMenuBundle.purchaseHistory}"/>
+            </h:panelGroup>
+            &nbsp;|&nbsp;
+            <h:form>
+                <h:commandLink value="#{mainMenuBundle.logoff}"
+                               actionListener="#{userBean.logoff()}" action="main"/>
+            </h:form>
+        </h:panelGrid>
+
+    </h:panelGrid>
+
+</ui:component>
+</html>
+

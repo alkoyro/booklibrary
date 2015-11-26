@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="tableLayout.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="header.css"/>
+        <h:outputStylesheet library="css" name="editForm.css"/>
+        <h:outputStylesheet library="css" name="viewForm.css"/>
+        <h:outputStylesheet library="css" name="containerForm.css"/>
+        <h:outputScript library="js" name="jquery.min.js"/>
+        <h:outputScript library="js" name="migrator.js"/>
+        <title><ui:insert name="title">Main page</ui:insert></title>
+    </h:head>
+    <h:body>
+        <table cellspacing="10px" width="100%">
+            <tr>
+                <td id="top" colspan="2">
+                    <ui:insert name="top">
+                        <ui:include src="resources/component/header.xhtml"/>
+                    </ui:insert>
+                </td>
+            </tr>
+            <tr>
+                <td id="left">
+                    <ui:insert name="left">
+
+                        <ui:include src="resources/component/menu.xhtml"/>
+                    </ui:insert>
+                </td>
+                <td id="content">
+                    <ui:insert name="content">Content</ui:insert>
+                </td>
+            </tr>
+            <tr>
+                <td id="bottom" colspan="2">
+                    <ui:insert name="bottom">
+                        <ui:include src="resources/component/footer.xhtml"/>
+                    </ui:insert>
+                </td>
+            </tr>
+        </table>
+    </h:body>
+</html>

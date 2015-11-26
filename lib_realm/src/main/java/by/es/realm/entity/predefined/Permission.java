@@ -1,0 +1,25 @@
+package by.es.realm.entity.predefined;
+
+public enum Permission
+{
+    VISIT_USER_AREA,
+    VISIT_MANAGEMENT_AREA,
+    VISIT_ADMIN_AREA,
+    LOOK_INTO_CART,
+    ADD_TO_CART,
+    ADD_BOOK,
+    EDIT_BOOK,
+    EDIT_USER,
+    EDIT_MANAGER,
+    GIVE_DISCOUNT,
+    PURCHASE_HISTORY,
+    TOP_BOOKS,
+    UPLOAD_DIGITAL_BOOK,
+    DOWNLOAD_DIGITAL_BOOK,
+    LEAVE_COMMENT,
+    BLOCK_USER,
+    CREATE_USER,
+    LOAN_DEBTS,
+    LOGIN_HISTORY,
+    SERVER_STATS;
+}

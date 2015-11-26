@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  User: Alexey.Koyro
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:m="http://mojarra.dev.java.net/mojarra_ext"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:sec="http://es.by/security"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:ct="http://java.sun.com/jsf/composite/util">
+
+<cc:interface>
+    <cc:attribute name="book" required="true"/>
+</cc:interface>
+
+<cc:implementation>
+    <f:event type="preRenderView" listener="#{commentBean.findBookComents(cc.attrs.book)}"/>
+
+    <h:form id="addCommentForm" rendered="#{sec:isAllowed('VISIT_USER_AREA')}">
+        <h:inputTextarea value="#{commentBean.commentText}" cols="80"/>
+        <br/>
+        <h:commandButton value="Add comment" actionListener="#{commentBean.addComment()}">
+            <f:param name="offset" value="#{param.offset}" disable="#{param.offset == null}" />
+        </h:commandButton>
+    </h:form>
+    <b class="label">Comments:</b>
+
+    <h:panelGroup rendered="#{fn:length(commentBean.commentList) == 0}">
+        There are no comments
+    </h:panelGroup>
+
+    <h:dataTable value="#{commentBean.commentList}" var="comment" styleClass="comments" id="bookComments">
+
+        <h:column>
+            <ct:userInfoLink user="#{comment.user}"/> | #{comment.commentDate}
+            <h:outputText value="#{comment.text}" styleClass="comment"/>
+            <h:form rendered="#{sec:isAllowed('VISIT_MANAGEMENT_AREA')}">
+                <h:commandLink actionListener="#{commentBean.deleteComment(comment)}" value="delete comment"
+                               onclick="return confirm('Delete this comment?')">
+                    <f:param name="offset" value="#{param.offset}" disable="#{param.offset == null}" />
+                </h:commandLink>
+                &nbsp;|&nbsp;
+                <h:commandLink value="edit comment" actionListener="#{commentBean.setEditComment(comment)}">
+                    <f:param name="offset" value="#{param.offset}" disable="#{param.offset == null}" />
+                </h:commandLink>
+                <br/> <br/>
+            </h:form>
+            <h:panelGroup id="editComment" rendered="#{(commentBean.editComment == comment)}">
+                <h:form>
+                    <h:inputTextarea value="#{commentBean.editComment.text}" cols="80"/>
+                    <br/>
+
+                    <h:commandButton actionListener="#{commentBean.updateComment()}" value="save">
+                        <f:param name="offset" value="#{param.offset}" disable="#{param.offset == null}" />
+                    </h:commandButton>
+                    <h:commandButton actionListener="#{commentBean.cancelEditComment()}" value="cancel">
+                        <f:param name="offset" value="#{param.offset}" disable="#{param.offset == null}" />
+                    </h:commandButton>
+                </h:form>
+            </h:panelGroup>
+        </h:column>
+    </h:dataTable>
+
+</cc:implementation>
+
+</html>

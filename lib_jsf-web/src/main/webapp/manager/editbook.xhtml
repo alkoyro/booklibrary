@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:cf="http://es.by/custom"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ct="http://java.sun.com/jsf/composite/util"
+      xmlns="http://www.w3.org/1999/xhtml">
+<ui:composition template="/mainTemplate.xhtml">
+    <ui:define name="title">Library/add book</ui:define>
+    <ui:define name="content">
+        <ct:previousPageLink styleClass="backURLlink"/>
+        <f:event type="preRenderView" listener="#{editBookBean.setBook(bookListBean.findById(param.bookId))}"/>
+        <br/>
+
+        <h:form>
+            <h:panelGrid columns="2" columnClasses="defaultEditFormLeft, defaultEditFormRight">
+
+                <h:outputLabel for="author" value="Book ID: "/>
+                <h:inputText for="author" value="#{editBookBean.book.id}" disabled="true" readonly="true" size="6"/>
+
+                <h:outputLabel for="author" value="Author: "/>
+                <h:panelGroup>
+                    <h:inputText id="author" label="Author" value="#{editBookBean.book.author}" maxlength="255"
+                                 size="50" required="true"/>
+                    &nbsp;<h:message for="author" styleClass="alert"/>
+                </h:panelGroup>
+
+
+                <h:outputLabel for="title" value="Title: "/>
+                <h:panelGroup>
+                    <h:inputText id="title" label="Title" value="#{editBookBean.book.title}" maxlength="255"
+                                 size="50" required="true"/>
+                    &nbsp;<h:message for="title" styleClass="alert"/>
+                </h:panelGroup>
+
+                <h:outputLabel for="description" value="Description: "/>
+
+                <h:inputTextarea id="description" value="#{editBookBean.book.description}" cols="50"
+                                 rows="5"/>
+
+                <h:outputLabel for="price" value="Price: "/>
+
+                <h:inputText id="price" value="#{editBookBean.book.price.cost}" converter="javax.faces.Double"
+                             size="10" maxlength="10"/>
+
+                <h:outputLabel for="priceLoan" value="Price ebook: "/>
+
+                <h:inputText id="priceLoan" value="#{editBookBean.book.price.costEbook}"
+                             converter="javax.faces.Double" size="10"
+                             maxlength="10"/>
+
+                <h:outputLabel for="quantity" value="Quantity: "/>
+
+                <h:inputText id="quantity" value="#{editBookBean.book.numberOfCopy}" size="3"
+                             maxlength="5"/>
+                <br/>
+                <h:panelGroup>
+                    <h:commandButton value="Update" actionListener="#{editBookBean.updateBook()}">
+                        <f:param name="bookId" value="#{editBookBean.book.id}"/>
+                    </h:commandButton>
+                    &nbsp;
+                    <h:button outcome="/manager/editbook" value="Reset">
+                        <f:param name="bookId" value="#{param.bookId}"/>
+                    </h:button>
+                    &nbsp;
+                    <h:commandButton
+                            action="main"
+                            value="Delete book"
+                            actionListener="#{editBookBean.deleteBook()}"
+                            onclick="return confirm('Delete this book?')"/>
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:form>
+        <br/>
+        <h:form enctype="multipart/form-data" id="uploadImage">
+
+            <h:graphicImage value="/images/#{editBookBean.book.id}"/>
+            <hr/>
+            <h:outputLabel for="imageUpload" value="Upload new image: " style="display: block;"/>
+            <t:inputFileUpload id="imageUpload" accept="image/*"
+                               value="#{editBookBean.uploadedImage}"/>
+            &nbsp;
+            <h:commandButton value="Upload image" actionListener="#{editBookBean.uploadImageFile()}">
+                <f:param name="bookId" value="#{editBookBean.book.id}"/>
+            </h:commandButton>
+            &nbsp;
+            <h:commandButton value="Delete image" actionListener="#{editBookBean.deleteImageFile()}">
+                <f:param name="bookId" value="#{editBookBean.book.id}"
+                         onclick="return confirm('Delete this image?')"/>
+            </h:commandButton>
+
+            <hr/>
+
+
+        </h:form>
+
+        <h:form enctype="multipart/form-data">
+
+
+            <br/>
+            <h:outputLabel for="eBookUpload" value="eBook: "/>
+            <br/><br/>
+
+            <h:panelGroup rendered="#{fn:length(editBookBean.book.eBookFileName)>0}">
+                <h:outputLink
+                        value="#{facesContext.externalContext.request.contextPath}/files/#{editBookBean.book.eBookFileName}">
+                    <b> <h:outputText value="#{editBookBean.book.eBookFileName}"/></b>
+                </h:outputLink>
+                &nbsp;|&nbsp;
+                <h:outputLink
+                        value="#{facesContext.externalContext.request.contextPath}/files/preview_#{editBookBean.book.eBookFileName}">
+                    <b><h:outputText value="Download preview"/></b>
+                </h:outputLink>
+            </h:panelGroup>
+
+
+            <h:outputLabel for="eBookUpload" value="Upload eBook: " style="display: block;"/>
+            <t:inputFileUpload id="eBookUpload" accept="*.pdf"
+                               value="#{editBookBean.uploadedEBook}"/>
+            &nbsp;
+            <h:commandButton value="Upload eBook" actionListener="#{editBookBean.uploadEBookFile()}">
+                <f:param name="bookId" value="#{editBookBean.book.id}"/>
+            </h:commandButton>
+            &nbsp;
+            <h:commandButton value="Delete eBook" actionListener="#{editBookBean.deleteEBookFile()}"
+                             onclick="return confirm('Delete this ebook?')">
+                <f:param name="bookId" value="#{editBookBean.book.id}"/>
+            </h:commandButton>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>

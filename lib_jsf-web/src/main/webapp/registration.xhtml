@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="mainTemplate.xhtml">
+    <ui:define name="title">Registration</ui:define>
+    <ui:define name="content">
+        <h:form id="registerUser" styleClass="defaultEditForm">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{registrationBundle.login}" for="loginText"/>
+                <h:inputText id="loginText" value="#{registrationBean.login}"
+                             validator="#{registrationBean.validateLogin}"
+                             binding="#{registrationBean.loginInput}">
+                </h:inputText>
+
+                <h:outputLabel value="#{registrationBundle.password1}" for="password1Text"/>
+                <h:inputSecret id="password1Text" value="#{registrationBean.firstPassword}"
+                               binding="#{registrationBean.firstPasswordInput}">
+                </h:inputSecret>
+
+                <h:outputLabel value="#{registrationBundle.password2}" for="password2Text"/>
+                <h:inputSecret id="password2Text" value="#{registrationBean.repeatPassword}"
+                               validator="#{registrationBean.validatePassword}"
+                               binding="#{registrationBean.repeatPasswordInput}">
+                </h:inputSecret>
+
+                <h:outputLabel value="#{registrationBundle.firstname}" for="firstNameText"/>
+                <h:inputText id="firstNameText" value="#{registrationBean.firstName}"
+                             binding="#{registrationBean.firstNameInput}">
+                    <f:validator validatorId="requiredValueValidator"/>
+                </h:inputText>
+
+                <h:outputLabel value="#{registrationBundle.lastname}" for="lastNameText"/>
+                <h:inputText id="lastNameText" value="#{registrationBean.lastName}"
+                             binding="#{registrationBean.lastNameInput}">
+                    <f:validator validatorId="requiredValueValidator"/>
+                </h:inputText>
+
+                <h:outputLabel value="#{registrationBundle.email}" for="emailText"/>
+                <h:inputText id="emailText" value="#{registrationBean.email}"
+                             binding="#{registrationBean.emailInput}">
+                    <f:validator validatorId="emailValidator"/>
+                    <f:validator validatorId="requiredValueValidator"/>
+                </h:inputText>
+
+            </h:panelGrid>
+
+            <h:commandButton value="#{registrationBundle.registerAction}" action="main"
+                             actionListener="#{registrationBean.register}">
+            </h:commandButton>
+
+            <f:event type="preValidate" listener="#{clearErrorsListener.clearWarnings}"/>
+        </h:form>
+
+        <h:panelGrid id="errorMessages" columns="2" binding="#{registrationBean.errorsPanel}"
+                     styleClass="errorMessages"/>
+
+    </ui:define>
+
+</ui:composition>
+</html>
